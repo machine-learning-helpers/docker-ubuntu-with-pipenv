@@ -3,7 +3,11 @@ FROM ubuntu:UBUNTU_TAG
 # use bash shell as default
 SHELL ["/bin/bash", "-c"]
 
-# install python, pip and pipenv
+# define timezone required for one of below libraries
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# install libraries suggested here: https://github.com/pyenv/pyenv/wiki#suggested-build-environment
 RUN apt-get update && \
     apt-get install -y sudo curl git gcc make openssl libssl-dev libbz2-dev libreadline-dev libsqlite3-dev zlib1g-dev \
     libffi-dev wget llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
